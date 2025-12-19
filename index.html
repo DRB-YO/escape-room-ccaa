@@ -1,0 +1,184 @@
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Escape Room: Comunidades Autónomas de España (2º ESO)</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 10px; background:#f7f7f7; }
+    h2 { text-align: center; }
+    #container { display: flex; gap: 20px; }
+    #labels { width: 30%; background:white; border-radius:8px; padding:10px; min-height:520px; box-shadow:0 2px 6px rgba(0,0,0,.2) }
+    .label { background: #e3f2fd; margin: 6px 0; padding: 8px; cursor: grab; border-radius: 6px; text-align: center; font-weight:bold }
+    #map { width: 70%; background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.2) }
+    .region { fill: #eeeeee; stroke: #555; stroke-width: 1; }
+    .region.correct { fill: #a5d6a7; }
+    #message { margin-top: 12px; font-size: 18px; font-weight: bold; text-align: center; }
+  </style>
+</head>
+<body>
+  <h2>Escape Room: Comunidades Autónomas de España</h2>
+  <p style="text-align:center">Arrastra cada comunidad a su lugar correcto para escapar 🗝️</p>
+
+  <audio id="sound-ok" src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3"></audio>
+  <audio id="sound-error" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+
+  <div id="container">
+    <!-- ETIQUETAS -->
+    <div id="labels">
+      <div class="label" draggable="true" data-region="andalucia">Andalucía</div>
+      <div class="label" draggable="true" data-region="aragon">Aragón</div>
+      <div class="label" draggable="true" data-region="asturias">Asturias</div>
+      <div class="label" draggable="true" data-region="cantabria">Cantabria</div>
+      <div class="label" draggable="true" data-region="cataluna">Cataluña</div>
+      <div class="label" draggable="true" data-region="valencia">Comunidad Valenciana</div>
+      <div class="label" draggable="true" data-region="madrid">Comunidad de Madrid</div>
+      <div class="label" draggable="true" data-region="castillalamancha">Castilla-La Mancha</div>
+      <div class="label" draggable="true" data-region="castillayleon">Castilla y León</div>
+      <div class="label" draggable="true" data-region="extremadura">Extremadura</div>
+      <div class="label" draggable="true" data-region="galicia">Galicia</div>
+      <div class="label" draggable="true" data-region="larioja">La Rioja</div>
+      <div class="label" draggable="true" data-region="navarra">Navarra</div>
+      <div class="label" draggable="true" data-region="paisvasco">País Vasco</div>
+      <div class="label" draggable="true" data-region="murcia">Región de Murcia</div>
+    </div>
+
+    <!-- MAPA SVG SIMPLIFICADO EDUCATIVO -->
+    <svg id="map" viewBox="0 0 500 420">
+      <path id="galicia" class="region" d="M30,80 L100,60 L120,110 L60,140 Z" />
+      <path id="asturias" class="region" d="M120,60 L200,60 L190,90 L120,90 Z" />
+      <path id="cantabria" class="region" d="M200,60 L260,60 L260,90 L200,90 Z" />
+      <path id="paisvasco" class="region" d="M260,60 L320,60 L330,90 L270,90 Z" />
+      <path id="navarra" class="region" d="M330,90 L360,90 L360,130 L330,130 Z" />
+      <path id="larioja" class="region" d="M280,100 L320,100 L320,140 L280,140 Z" />
+      <path id="aragon" class="region" d="M330,130 L400,130 L400,220 L330,220 Z" />
+      <path id="cataluna" class="region" d="M400,130 L470,130 L470,220 L400,220 Z" />
+      <path id="castillayleon" class="region" d="M120,100 L280,100 L280,200 L120,200 Z" />
+      <path id="madrid" class="region" d="M230,200 L260,200 L260,230 L230,230 Z" />
+      <path id="castillalamancha" class="region" d="M160,200 L330,200 L330,300 L160,300 Z" />
+      <path id="valencia" class="region" d="M330,220 L400,220 L400,320 L330,320 Z" />
+      <path id="murcia" class="region" d="M300,300 L380,300 L380,360 L300,360 Z" />
+      <path id="extremadura" class="region" d="M100,220 L160,220 L160,320 L100,320 Z" />
+      <path id="andalucia" class="region" d="M160,300 L360,300 L360,380 L160,380 Z" />
+    </svg>
+  </div>
+
+  <div id="message"></div>
+
+  <script>
+    let draggedLabel = null;
+    const okSound = document.getElementById('sound-ok');
+    const errorSound = document.getElementById('sound-error');
+
+    document.querySelectorAll('.label').forEach(label => {
+      label.addEventListener('dragstart', () => draggedLabel = label);
+    });
+
+    document.querySelectorAll('.region').forEach(region => {
+      region.addEventListener('dragover', e => e.preventDefault());
+      region.addEventListener('drop', () => {
+        const message = document.getElementById('message');
+        if (!draggedLabel) return;
+
+        if (region.id === draggedLabel.dataset.region) {
+          region.classList.add('correct');
+          draggedLabel.remove();
+          okSound.play();
+          message.style.color = 'green';
+          message.textContent = '✔ Correcto';
+        } else {
+          errorSound.play();
+          message.style.color = 'red';
+          message.textContent = '✖ Incorrecto, vuelve a intentarlo';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+body {
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+}
+
+#container {
+  display: flex;
+  gap: 20px;
+}
+
+#labels {
+  width: 30%;
+  background: white;
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 520px;
+}
+
+.label {
+  background: #e3f2fd;
+  margin: 6px 0;
+  padding: 8px;
+  cursor: grab;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#region.correct {
+  fill: #a5d6a7;
+}
+
+#region {
+  fill: #eeeeee;
+  stroke: #555;
+}
+
+#map {
+  width: 70%;
+  background: white;
+  border-radius: 8px;
+}
+
+.region {
+  fill: #eeeeee;
+  stroke: #555;
+}
+
+.region.correct {
+  fill: #a5d6a7;
+}
+
+#message {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+let draggedLabel = null;
+const okSound = document.getElementById("sound-ok");
+const errorSound = document.getElementById("sound-error");
+
+document.querySelectorAll(".label").forEach(label => {
+  label.addEventListener("dragstart", () => {
+    draggedLabel = label;
+  });
+});
+
+document.querySelectorAll(".region").forEach(region => {
+  region.addEventListener("dragover", e => e.preventDefault());
+
+  region.addEventListener("drop", () => {
+    const message = document.getElementById("message");
+    if (!draggedLabel) return;
+
+    if (region.id === draggedLabel.dataset.region) {
+      region.classList.add("correct");
+      draggedLabel.remove();
+      okSound.play();
+      message.style.color = "green";
+      message.textContent = "✔ Correcto";
+    } else {
+      errorSound.play();
+      message.style.color = "red";
+      message.textContent = "✖ Incorrecto, vuelve a intentarlo";
+    }
+  });
+});
