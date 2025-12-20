@@ -42,26 +42,46 @@
     </div>
 
     <!-- MAPA SVG SIMPLIFICADO EDUCATIVO -->
-    <svg id="map" viewBox="0 0 500 420">
-      <path id="galicia" class="region" d="M30,80 L100,60 L120,110 L60,140 Z" />
-      <path id="asturias" class="region" d="M120,60 L200,60 L190,90 L120,90 Z" />
-      <path id="cantabria" class="region" d="M200,60 L260,60 L260,90 L200,90 Z" />
-      <path id="paisvasco" class="region" d="M260,60 L320,60 L330,90 L270,90 Z" />
-      <path id="navarra" class="region" d="M330,90 L360,90 L360,130 L330,130 Z" />
-      <path id="larioja" class="region" d="M280,100 L320,100 L320,140 L280,140 Z" />
-      <path id="aragon" class="region" d="M330,130 L400,130 L400,220 L330,220 Z" />
-      <path id="cataluna" class="region" d="M400,130 L470,130 L470,220 L400,220 Z" />
-      <path id="castillayleon" class="region" d="M120,100 L280,100 L280,200 L120,200 Z" />
-      <path id="madrid" class="region" d="M230,200 L260,200 L260,230 L230,230 Z" />
-      <path id="castillalamancha" class="region" d="M160,200 L330,200 L330,300 L160,300 Z" />
-      <path id="valencia" class="region" d="M330,220 L400,220 L400,320 L330,320 Z" />
-      <path id="murcia" class="region" d="M300,300 L380,300 L380,360 L300,360 Z" />
-      <path id="extremadura" class="region" d="M100,220 L160,220 L160,320 L100,320 Z" />
-      <path id="andalucia" class="region" d="M160,300 L360,300 L360,380 L160,380 Z" />
-    </svg>
-  </div>
+   <svg
+  viewBox="0 0 800 600"
+  width="100%"
+  height="100%"
+  xmlns="http://www.w3.org/2000/svg"
+  style="background:#eef6ff"
+>
 
-  <div id="message"></div>
+  <!-- CONTORNO DE ESPAÑA (MAPA BASE) -->
+  <path
+    d="M120,180 L200,120 L350,110 L480,140 L600,180 L650,260 L620,360 L520,420 L380,430 L260,400 L180,340 L140,260 Z"
+    fill="#ffffff"
+    stroke="#333"
+    stroke-width="4"
+  />
+
+  <!-- ZONAS (ejemplo de comunidades) -->
+  <path id="andalucia"
+    d="M260,350 L420,350 L450,410 L300,430 Z"
+    fill="#9cc9ff"
+    stroke="#333"
+    data-name="Andalucía"
+  />
+
+  <path id="cataluna"
+    d="M480,180 L560,200 L550,260 L480,240 Z"
+    fill="#9cc9ff"
+    stroke="#333"
+    data-name="Cataluña"
+  />
+
+  <path id="madrid"
+    d="M360,260 L390,260 L390,290 L360,290 Z"
+    fill="#9cc9ff"
+    stroke="#333"
+    data-name="Madrid"
+  />
+
+</svg>
+
 
   <script>
     let draggedLabel = null;
