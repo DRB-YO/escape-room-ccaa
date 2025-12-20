@@ -13,12 +13,18 @@
 
   h1 {
     text-align: center;
-    margin: 10px 0;
+    margin: 10px 0 5px 0;
+  }
+
+  #progreso {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
   }
 
   #contenedor {
     display: flex;
-    height: 90vh;
+    height: 85vh;
   }
 
   #etiquetas {
@@ -49,7 +55,7 @@
   svg {
     width: 95%;
     height: 95%;
-    background: #e6f2ff;
+    background: #b3d9ff; /* MAR */
   }
 
   .zona {
@@ -60,12 +66,6 @@
 
   .correcta {
     fill: #8bcf9c !important;
-  }
-
-  #progreso {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
   }
 </style>
 </head>
@@ -102,11 +102,26 @@
   <div id="mapa">
     <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- CONTORNO -->
-      <path d="M120,180 L200,120 L350,110 L480,140 L600,180 L650,260 L620,360 L520,420 L380,430 L260,400 L180,340 L140,260 Z"
-        fill="#ffffff" stroke="#333" stroke-width="4"/>
+      <!-- SOMBRA -->
+      <defs>
+        <filter id="sombra">
+          <feDropShadow dx="3" dy="3" stdDeviation="4" flood-color="#00000055"/>
+        </filter>
+      </defs>
 
-      <!-- ZONAS (simplificadas, pedagógicas) -->
+      <!-- CONTORNO DE ESPAÑA -->
+      <path
+        d="M120,180 L200,120 L350,110 L480,140 L600,180 L650,260
+           L620,360 L520,420 L380,430 L260,400 L180,340 L140,260 Z"
+        fill="#ffffff"
+        stroke="#1a1a1a"
+        stroke-width="6"
+        stroke-linejoin="round"
+        stroke-linecap="round"
+        filter="url(#sombra)"
+      />
+
+      <!-- COMUNIDADES -->
       <path id="galicia" class="zona" d="M140,180 L200,160 L220,220 L160,240 Z"/>
       <path id="asturias" class="zona" d="M220,150 L280,150 L280,180 L220,180 Z"/>
       <path id="cantabria" class="zona" d="M280,150 L330,150 L330,180 L280,180 Z"/>
