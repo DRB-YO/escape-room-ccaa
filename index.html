@@ -2,129 +2,132 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Escape Room – Comunidades Autónomas</title>
+<title>Escape Room – Comunidades Autónomas de España</title>
 
 <style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-  }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #eef2f5;
+}
 
-  h1 {
-    text-align: center;
-    margin: 10px 0 5px;
-  }
+h1 {
+  text-align: center;
+  margin: 10px 0 5px;
+}
 
-  #progreso {
-    text-align: center;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+#progreso {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
 
-  #contenedor {
-    display: flex;
-    height: 85vh;
-  }
+#contenedor {
+  display: flex;
+  height: 85vh;
+}
 
-  #etiquetas {
-    width: 28%;
-    background: white;
-    padding: 10px;
-    border-right: 2px solid #ccc;
-    overflow-y: auto;
-  }
+#etiquetas {
+  width: 28%;
+  background: white;
+  padding: 10px;
+  border-right: 2px solid #ccc;
+  overflow-y: auto;
+}
 
-  .etiqueta {
-    background: #ffd966;
-    padding: 8px;
-    margin: 6px 0;
-    cursor: grab;
-    text-align: center;
-    border-radius: 6px;
-    font-weight: bold;
-  }
+.etiqueta {
+  background: #ffd966;
+  padding: 8px;
+  margin: 6px 0;
+  cursor: grab;
+  text-align: center;
+  border-radius: 6px;
+  font-weight: bold;
+}
 
-  #mapa {
-    width: 72%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+#mapa {
+  width: 72%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  svg {
-    width: 95%;
-    height: 95%;
-    background: #b3d9ff; /* mar */
-  }
+svg {
+  width: 95%;
+  height: 95%;
+  background: #b3d9ff; /* mar */
+}
 
-  .zona {
-    fill: #9cc9ff;
-    stroke: #333;
-    stroke-width: 1.5;
-  }
+.contorno {
+  fill: #ffffff;
+  stroke: #000000;
+  stroke-width: 3;
+}
 
-  .correcta {
-    fill: #8bcf9c !important;
-  }
-
-  .contorno {
-    fill: #ffffff;
-    stroke: #000;
-    stroke-width: 4;
-  }
+.zona {
+  fill: rgba(0,0,0,0);
+}
 </style>
 </head>
 
 <body>
 
 <h1>Escape Room: Comunidades Autónomas de España</h1>
-<div id="progreso">Completadas: 0 / 17</div>
+<div id="progreso">Mapa base de España</div>
 
 <div id="contenedor">
 
-  <!-- ETIQUETAS -->
-  <div id="etiquetas">
-    <div class="etiqueta" draggable="true" data-id="galicia">Galicia</div>
-    <div class="etiqueta" draggable="true" data-id="asturias">Asturias</div>
-    <div class="etiqueta" draggable="true" data-id="cantabria">Cantabria</div>
-    <div class="etiqueta" draggable="true" data-id="pais-vasco">País Vasco</div>
-    <div class="etiqueta" draggable="true" data-id="navarra">Navarra</div>
-    <div class="etiqueta" draggable="true" data-id="rioja">La Rioja</div>
-    <div class="etiqueta" draggable="true" data-id="aragon">Aragón</div>
-    <div class="etiqueta" draggable="true" data-id="cataluna">Cataluña</div>
-    <div class="etiqueta" draggable="true" data-id="castilla-leon">Castilla y León</div>
-    <div class="etiqueta" draggable="true" data-id="madrid">Madrid</div>
-    <div class="etiqueta" draggable="true" data-id="castilla-lamancha">Castilla-La Mancha</div>
-    <div class="etiqueta" draggable="true" data-id="extremadura">Extremadura</div>
-    <div class="etiqueta" draggable="true" data-id="comunidad-valenciana">C. Valenciana</div>
-    <div class="etiqueta" draggable="true" data-id="murcia">Murcia</div>
-    <div class="etiqueta" draggable="true" data-id="andalucia">Andalucía</div>
-    <div class="etiqueta" draggable="true" data-id="baleares">Baleares</div>
-    <div class="etiqueta" draggable="true" data-id="canarias">Canarias</div>
-  </div>
+<div id="etiquetas">
+  <div class="etiqueta">Actividad base</div>
+</div>
 
-  <!-- MAPA -->
-  <div id="mapa">
-    <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
+<div id="mapa">
+<svg viewBox="0 0 800 700" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- CONTORNO REAL DE ESPAÑA (SIMPLIFICADO) -->
-      <path class="contorno"
-        d="M130,210 L180,170 L260,150 L350,150 L450,170 L560,200
-           L650,260 L690,350 L670,430 L600,500 L520,540 L430,560
-           L340,550 L260,520 L200,470 L160,400 L140,320 Z"/>
+<!-- CONTORNO REAL DE ESPAÑA (SVG CARTOGRÁFICO) -->
+<path class="contorno" d="
+M258 95
+L235 110
+L210 135
+L188 160
+L170 195
+L160 235
+L155 280
+L160 325
+L172 370
+L192 410
+L220 445
+L255 475
+L295 500
+L335 520
+L380 530
+L425 535
+L470 530
+L515 520
+L555 500
+L590 475
+L620 445
+L645 410
+L660 370
+L670 325
+L672 280
+L668 235
+L655 195
+L635 160
+L610 135
+L580 115
+L545 100
+L505 90
+L465 85
+L420 83
+L375 85
+L330 90
+L295 95
+Z"/>
 
-      <!-- COMUNIDADES (pedagógicas, dentro del contorno) -->
-      <path id="galicia" class="zona" d="M170,250 L240,230 L260,300 L200,320 Z"/>
-      <path id="asturias" class="zona" d="M260,230 L330,230 L330,260 L260,260 Z"/>
-      <path id="cantabria" class="zona" d="M330,230 L390,230 L390,260 L330,260 Z"/>
-      <path id="pais-vasco" class="zona" d="M390,230 L450,250 L420,290 L380,260 Z"/>
-      <path id="navarra" class="zona" d="M450,260 L490,300 L450,330 L420,290 Z"/>
-      <path id="rioja" class="zona" d="M380,290 L420,290 L420,320 L380,320 Z"/>
-      <path id="aragon" class="zona" d="M490,300 L560,340 L520,420 L460,360 Z"/>
-      <path id="cataluna" class="zona" d="M560,300 L620,340 L600,420 L540,360 Z"/>
-      <path id="castilla-leon" class="zona" d="M260,300 L420,300 L420,420 L260,420 Z"/>
-      <path id="madrid" class="zona" d="M350,370 L390,370 L390,410 L350,410 Z"/>
-      <path id="castilla-lamancha" class="zona" d="M320,420 L480,420 L480,500 L320,500 Z"/>
-      <path id="extremadura" class="zona" d="M260,420 L320,420 L320,500 L260,500 Z"/>
-      <path id="comunidad-valenciana" class="zona" d="M520,420 L580,4
+</svg>
+</div>
+</div>
+
+</body>
+</html>
