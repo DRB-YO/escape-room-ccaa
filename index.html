@@ -22,10 +22,11 @@
   }
 
   #etiquetas {
-    width: 25%;
+    width: 28%;
     background: #ffffff;
     padding: 10px;
     border-right: 2px solid #ccc;
+    overflow-y: auto;
   }
 
   .etiqueta {
@@ -39,7 +40,7 @@
   }
 
   #mapa {
-    width: 75%;
+    width: 72%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,52 +61,80 @@
   .correcta {
     fill: #8bcf9c !important;
   }
+
+  #progreso {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
 </style>
 </head>
 
 <body>
 
 <h1>Escape Room: Comunidades Autónomas de España</h1>
+<div id="progreso">Completadas: 0 / 17</div>
 
 <div id="contenedor">
 
+  <!-- ETIQUETAS -->
   <div id="etiquetas">
     <div class="etiqueta" draggable="true" data-id="andalucia">Andalucía</div>
+    <div class="etiqueta" draggable="true" data-id="aragon">Aragón</div>
+    <div class="etiqueta" draggable="true" data-id="asturias">Asturias</div>
+    <div class="etiqueta" draggable="true" data-id="baleares">Islas Baleares</div>
+    <div class="etiqueta" draggable="true" data-id="canarias">Canarias</div>
+    <div class="etiqueta" draggable="true" data-id="cantabria">Cantabria</div>
+    <div class="etiqueta" draggable="true" data-id="castilla-lamancha">Castilla-La Mancha</div>
+    <div class="etiqueta" draggable="true" data-id="castilla-leon">Castilla y León</div>
     <div class="etiqueta" draggable="true" data-id="cataluna">Cataluña</div>
+    <div class="etiqueta" draggable="true" data-id="comunidad-valenciana">Comunidad Valenciana</div>
+    <div class="etiqueta" draggable="true" data-id="extremadura">Extremadura</div>
+    <div class="etiqueta" draggable="true" data-id="galicia">Galicia</div>
     <div class="etiqueta" draggable="true" data-id="madrid">Madrid</div>
+    <div class="etiqueta" draggable="true" data-id="murcia">Región de Murcia</div>
+    <div class="etiqueta" draggable="true" data-id="navarra">Navarra</div>
+    <div class="etiqueta" draggable="true" data-id="pais-vasco">País Vasco</div>
+    <div class="etiqueta" draggable="true" data-id="rioja">La Rioja</div>
   </div>
 
+  <!-- MAPA -->
   <div id="mapa">
-
-    <!-- MAPA SVG -->
     <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- CONTORNO DE ESPAÑA -->
-      <path
-        d="M120,180 L200,120 L350,110 L480,140 L600,180 L650,260 L620,360 L520,420 L380,430 L260,400 L180,340 L140,260 Z"
-        fill="#ffffff"
-        stroke="#333"
-        stroke-width="4"
-      />
+      <!-- CONTORNO -->
+      <path d="M120,180 L200,120 L350,110 L480,140 L600,180 L650,260 L620,360 L520,420 L380,430 L260,400 L180,340 L140,260 Z"
+        fill="#ffffff" stroke="#333" stroke-width="4"/>
 
-      <!-- ZONAS -->
-      <path id="andalucia" class="zona"
-        d="M260,350 L420,350 L450,410 L300,430 Z" />
+      <!-- ZONAS (simplificadas, pedagógicas) -->
+      <path id="galicia" class="zona" d="M140,180 L200,160 L220,220 L160,240 Z"/>
+      <path id="asturias" class="zona" d="M220,150 L280,150 L280,180 L220,180 Z"/>
+      <path id="cantabria" class="zona" d="M280,150 L330,150 L330,180 L280,180 Z"/>
+      <path id="pais-vasco" class="zona" d="M330,150 L390,160 L370,200 L330,180 Z"/>
+      <path id="navarra" class="zona" d="M390,170 L430,200 L400,230 L370,200 Z"/>
+      <path id="rioja" class="zona" d="M340,190 L380,190 L380,220 L340,220 Z"/>
+      <path id="aragon" class="zona" d="M430,200 L500,230 L470,300 L410,260 Z"/>
+      <path id="cataluna" class="zona" d="M500,200 L580,230 L560,300 L490,260 Z"/>
+      <path id="castilla-leon" class="zona" d="M240,200 L360,200 L360,300 L240,300 Z"/>
+      <path id="madrid" class="zona" d="M330,270 L360,270 L360,300 L330,300 Z"/>
+      <path id="castilla-lamancha" class="zona" d="M300,300 L420,300 L420,360 L300,360 Z"/>
+      <path id="extremadura" class="zona" d="M240,300 L300,300 L300,360 L240,360 Z"/>
+      <path id="comunidad-valenciana" class="zona" d="M470,300 L540,330 L520,380 L460,350 Z"/>
+      <path id="murcia" class="zona" d="M470,360 L520,390 L480,420 L450,390 Z"/>
+      <path id="andalucia" class="zona" d="M260,360 L450,360 L430,430 L300,430 Z"/>
 
-      <path id="cataluna" class="zona"
-        d="M480,180 L560,200 L550,260 L480,240 Z" />
-
-      <path id="madrid" class="zona"
-        d="M360,260 L390,260 L390,290 L360,290 Z" />
+      <!-- ISLAS -->
+      <rect id="baleares" class="zona" x="620" y="240" width="60" height="40"/>
+      <rect id="canarias" class="zona" x="620" y="320" width="80" height="50"/>
 
     </svg>
-
   </div>
 </div>
 
 <script>
   const etiquetas = document.querySelectorAll('.etiqueta');
   const zonas = document.querySelectorAll('.zona');
+  let correctas = 0;
 
   etiquetas.forEach(et => {
     et.addEventListener('dragstart', e => {
@@ -120,12 +149,18 @@
       e.preventDefault();
       const idEtiqueta = e.dataTransfer.getData('text');
 
-      if (zona.id === idEtiqueta) {
+      if (zona.id === idEtiqueta && !zona.classList.contains('correcta')) {
         zona.classList.add('correcta');
         document.querySelector(`.etiqueta[data-id="${idEtiqueta}"]`).remove();
-        alert('¡Correcto!');
+        correctas++;
+        document.getElementById('progreso').textContent =
+          `Completadas: ${correctas} / 17`;
+
+        if (correctas === 17) {
+          alert("🎉 ¡Enhorabuena! Has completado el mapa de España 🎉");
+        }
       } else {
-        alert('No es correcto, inténtalo de nuevo');
+        alert("❌ No es correcto. Inténtalo de nuevo.");
       }
     });
   });
