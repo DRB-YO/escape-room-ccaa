@@ -13,7 +13,7 @@
 
   h1 {
     text-align: center;
-    margin: 10px 0 5px 0;
+    margin: 10px 0 5px;
   }
 
   #progreso {
@@ -29,7 +29,7 @@
 
   #etiquetas {
     width: 28%;
-    background: #ffffff;
+    background: white;
     padding: 10px;
     border-right: 2px solid #ccc;
     overflow-y: auto;
@@ -55,17 +55,23 @@
   svg {
     width: 95%;
     height: 95%;
-    background: #b3d9ff; /* MAR */
+    background: #b3d9ff; /* mar */
   }
 
   .zona {
     fill: #9cc9ff;
     stroke: #333;
-    stroke-width: 2;
+    stroke-width: 1.5;
   }
 
   .correcta {
     fill: #8bcf9c !important;
+  }
+
+  .contorno {
+    fill: #ffffff;
+    stroke: #000;
+    stroke-width: 4;
   }
 </style>
 </head>
@@ -79,107 +85,46 @@
 
   <!-- ETIQUETAS -->
   <div id="etiquetas">
-    <div class="etiqueta" draggable="true" data-id="andalucia">Andalucía</div>
-    <div class="etiqueta" draggable="true" data-id="aragon">Aragón</div>
-    <div class="etiqueta" draggable="true" data-id="asturias">Asturias</div>
-    <div class="etiqueta" draggable="true" data-id="baleares">Islas Baleares</div>
-    <div class="etiqueta" draggable="true" data-id="canarias">Canarias</div>
-    <div class="etiqueta" draggable="true" data-id="cantabria">Cantabria</div>
-    <div class="etiqueta" draggable="true" data-id="castilla-lamancha">Castilla-La Mancha</div>
-    <div class="etiqueta" draggable="true" data-id="castilla-leon">Castilla y León</div>
-    <div class="etiqueta" draggable="true" data-id="cataluna">Cataluña</div>
-    <div class="etiqueta" draggable="true" data-id="comunidad-valenciana">Comunidad Valenciana</div>
-    <div class="etiqueta" draggable="true" data-id="extremadura">Extremadura</div>
     <div class="etiqueta" draggable="true" data-id="galicia">Galicia</div>
-    <div class="etiqueta" draggable="true" data-id="madrid">Madrid</div>
-    <div class="etiqueta" draggable="true" data-id="murcia">Región de Murcia</div>
-    <div class="etiqueta" draggable="true" data-id="navarra">Navarra</div>
+    <div class="etiqueta" draggable="true" data-id="asturias">Asturias</div>
+    <div class="etiqueta" draggable="true" data-id="cantabria">Cantabria</div>
     <div class="etiqueta" draggable="true" data-id="pais-vasco">País Vasco</div>
+    <div class="etiqueta" draggable="true" data-id="navarra">Navarra</div>
     <div class="etiqueta" draggable="true" data-id="rioja">La Rioja</div>
+    <div class="etiqueta" draggable="true" data-id="aragon">Aragón</div>
+    <div class="etiqueta" draggable="true" data-id="cataluna">Cataluña</div>
+    <div class="etiqueta" draggable="true" data-id="castilla-leon">Castilla y León</div>
+    <div class="etiqueta" draggable="true" data-id="madrid">Madrid</div>
+    <div class="etiqueta" draggable="true" data-id="castilla-lamancha">Castilla-La Mancha</div>
+    <div class="etiqueta" draggable="true" data-id="extremadura">Extremadura</div>
+    <div class="etiqueta" draggable="true" data-id="comunidad-valenciana">C. Valenciana</div>
+    <div class="etiqueta" draggable="true" data-id="murcia">Murcia</div>
+    <div class="etiqueta" draggable="true" data-id="andalucia">Andalucía</div>
+    <div class="etiqueta" draggable="true" data-id="baleares">Baleares</div>
+    <div class="etiqueta" draggable="true" data-id="canarias">Canarias</div>
   </div>
 
   <!-- MAPA -->
   <div id="mapa">
-    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 1000 800" xmlns="http://www.w3.org/2000/svg">
 
-      <!-- SOMBRA -->
-      <defs>
-        <filter id="sombra">
-          <feDropShadow dx="3" dy="3" stdDeviation="4" flood-color="#00000055"/>
-        </filter>
-      </defs>
+      <!-- CONTORNO REAL DE ESPAÑA (SIMPLIFICADO) -->
+      <path class="contorno"
+        d="M130,210 L180,170 L260,150 L350,150 L450,170 L560,200
+           L650,260 L690,350 L670,430 L600,500 L520,540 L430,560
+           L340,550 L260,520 L200,470 L160,400 L140,320 Z"/>
 
-      <!-- CONTORNO DE ESPAÑA -->
-      <path
-        d="M120,180 L200,120 L350,110 L480,140 L600,180 L650,260
-           L620,360 L520,420 L380,430 L260,400 L180,340 L140,260 Z"
-        fill="#ffffff"
-        stroke="#1a1a1a"
-        stroke-width="6"
-        stroke-linejoin="round"
-        stroke-linecap="round"
-        filter="url(#sombra)"
-      />
-
-      <!-- COMUNIDADES -->
-      <path id="galicia" class="zona" d="M140,180 L200,160 L220,220 L160,240 Z"/>
-      <path id="asturias" class="zona" d="M220,150 L280,150 L280,180 L220,180 Z"/>
-      <path id="cantabria" class="zona" d="M280,150 L330,150 L330,180 L280,180 Z"/>
-      <path id="pais-vasco" class="zona" d="M330,150 L390,160 L370,200 L330,180 Z"/>
-      <path id="navarra" class="zona" d="M390,170 L430,200 L400,230 L370,200 Z"/>
-      <path id="rioja" class="zona" d="M340,190 L380,190 L380,220 L340,220 Z"/>
-      <path id="aragon" class="zona" d="M430,200 L500,230 L470,300 L410,260 Z"/>
-      <path id="cataluna" class="zona" d="M500,200 L580,230 L560,300 L490,260 Z"/>
-      <path id="castilla-leon" class="zona" d="M240,200 L360,200 L360,300 L240,300 Z"/>
-      <path id="madrid" class="zona" d="M330,270 L360,270 L360,300 L330,300 Z"/>
-      <path id="castilla-lamancha" class="zona" d="M300,300 L420,300 L420,360 L300,360 Z"/>
-      <path id="extremadura" class="zona" d="M240,300 L300,300 L300,360 L240,360 Z"/>
-      <path id="comunidad-valenciana" class="zona" d="M470,300 L540,330 L520,380 L460,350 Z"/>
-      <path id="murcia" class="zona" d="M470,360 L520,390 L480,420 L450,390 Z"/>
-      <path id="andalucia" class="zona" d="M260,360 L450,360 L430,430 L300,430 Z"/>
-
-      <!-- ISLAS -->
-      <rect id="baleares" class="zona" x="620" y="240" width="60" height="40"/>
-      <rect id="canarias" class="zona" x="620" y="320" width="80" height="50"/>
-
-    </svg>
-  </div>
-</div>
-
-<script>
-  const etiquetas = document.querySelectorAll('.etiqueta');
-  const zonas = document.querySelectorAll('.zona');
-  let correctas = 0;
-
-  etiquetas.forEach(et => {
-    et.addEventListener('dragstart', e => {
-      e.dataTransfer.setData('text', et.dataset.id);
-    });
-  });
-
-  zonas.forEach(zona => {
-    zona.addEventListener('dragover', e => e.preventDefault());
-
-    zona.addEventListener('drop', e => {
-      e.preventDefault();
-      const idEtiqueta = e.dataTransfer.getData('text');
-
-      if (zona.id === idEtiqueta && !zona.classList.contains('correcta')) {
-        zona.classList.add('correcta');
-        document.querySelector(`.etiqueta[data-id="${idEtiqueta}"]`).remove();
-        correctas++;
-        document.getElementById('progreso').textContent =
-          `Completadas: ${correctas} / 17`;
-
-        if (correctas === 17) {
-          alert("🎉 ¡Enhorabuena! Has completado el mapa de España 🎉");
-        }
-      } else {
-        alert("❌ No es correcto. Inténtalo de nuevo.");
-      }
-    });
-  });
-</script>
-
-</body>
-</html>
+      <!-- COMUNIDADES (pedagógicas, dentro del contorno) -->
+      <path id="galicia" class="zona" d="M170,250 L240,230 L260,300 L200,320 Z"/>
+      <path id="asturias" class="zona" d="M260,230 L330,230 L330,260 L260,260 Z"/>
+      <path id="cantabria" class="zona" d="M330,230 L390,230 L390,260 L330,260 Z"/>
+      <path id="pais-vasco" class="zona" d="M390,230 L450,250 L420,290 L380,260 Z"/>
+      <path id="navarra" class="zona" d="M450,260 L490,300 L450,330 L420,290 Z"/>
+      <path id="rioja" class="zona" d="M380,290 L420,290 L420,320 L380,320 Z"/>
+      <path id="aragon" class="zona" d="M490,300 L560,340 L520,420 L460,360 Z"/>
+      <path id="cataluna" class="zona" d="M560,300 L620,340 L600,420 L540,360 Z"/>
+      <path id="castilla-leon" class="zona" d="M260,300 L420,300 L420,420 L260,420 Z"/>
+      <path id="madrid" class="zona" d="M350,370 L390,370 L390,410 L350,410 Z"/>
+      <path id="castilla-lamancha" class="zona" d="M320,420 L480,420 L480,500 L320,500 Z"/>
+      <path id="extremadura" class="zona" d="M260,420 L320,420 L320,500 L260,500 Z"/>
+      <path id="comunidad-valenciana" class="zona" d="M520,420 L580,4
