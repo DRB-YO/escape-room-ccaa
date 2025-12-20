@@ -1,204 +1,135 @@
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Escape Room: Comunidades Autónomas de España (2º ESO)</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 10px; background:#f7f7f7; }
-    h2 { text-align: center; }
-    #container { display: flex; gap: 20px; }
-    #labels { width: 30%; background:white; border-radius:8px; padding:10px; min-height:520px; box-shadow:0 2px 6px rgba(0,0,0,.2) }
-    .label { background: #e3f2fd; margin: 6px 0; padding: 8px; cursor: grab; border-radius: 6px; text-align: center; font-weight:bold }
-    #map { width: 70%; background:white; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.2) }
-    .region { fill: #eeeeee; stroke: #555; stroke-width: 1; }
-    .region.correct { fill: #a5d6a7; }
-    #message { margin-top: 12px; font-size: 18px; font-weight: bold; text-align: center; }
-  </style>
+<meta charset="UTF-8">
+<title>Escape Room – Comunidades Autónomas</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+  }
+
+  h1 {
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  #contenedor {
+    display: flex;
+    height: 90vh;
+  }
+
+  #etiquetas {
+    width: 25%;
+    background: #ffffff;
+    padding: 10px;
+    border-right: 2px solid #ccc;
+  }
+
+  .etiqueta {
+    background: #ffd966;
+    padding: 8px;
+    margin: 6px 0;
+    cursor: grab;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: bold;
+  }
+
+  #mapa {
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  svg {
+    width: 95%;
+    height: 95%;
+    background: #e6f2ff;
+  }
+
+  .zona {
+    fill: #9cc9ff;
+    stroke: #333;
+    stroke-width: 2;
+  }
+
+  .correcta {
+    fill: #8bcf9c !important;
+  }
+</style>
 </head>
+
 <body>
-  <h2>Escape Room: Comunidades Autónomas de España</h2>
-  <p style="text-align:center">Arrastra cada comunidad a su lugar correcto para escapar 🗝️</p>
 
-  <audio id="sound-ok" src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3"></audio>
-  <audio id="sound-error" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3"></audio>
+<h1>Escape Room: Comunidades Autónomas de España</h1>
 
-  <div id="container">
-    <!-- ETIQUETAS -->
-    <div id="labels">
-      <div class="label" draggable="true" data-region="andalucia">Andalucía</div>
-      <div class="label" draggable="true" data-region="aragon">Aragón</div>
-      <div class="label" draggable="true" data-region="asturias">Asturias</div>
-      <div class="label" draggable="true" data-region="cantabria">Cantabria</div>
-      <div class="label" draggable="true" data-region="cataluna">Cataluña</div>
-      <div class="label" draggable="true" data-region="valencia">Comunidad Valenciana</div>
-      <div class="label" draggable="true" data-region="madrid">Comunidad de Madrid</div>
-      <div class="label" draggable="true" data-region="castillalamancha">Castilla-La Mancha</div>
-      <div class="label" draggable="true" data-region="castillayleon">Castilla y León</div>
-      <div class="label" draggable="true" data-region="extremadura">Extremadura</div>
-      <div class="label" draggable="true" data-region="galicia">Galicia</div>
-      <div class="label" draggable="true" data-region="larioja">La Rioja</div>
-      <div class="label" draggable="true" data-region="navarra">Navarra</div>
-      <div class="label" draggable="true" data-region="paisvasco">País Vasco</div>
-      <div class="label" draggable="true" data-region="murcia">Región de Murcia</div>
-    </div>
+<div id="contenedor">
 
-    <!-- MAPA SVG SIMPLIFICADO EDUCATIVO -->
-   <svg
-  viewBox="0 0 800 600"
-  width="100%"
-  height="100%"
-  xmlns="http://www.w3.org/2000/svg"
-  style="background:#eef6ff"
->
+  <div id="etiquetas">
+    <div class="etiqueta" draggable="true" data-id="andalucia">Andalucía</div>
+    <div class="etiqueta" draggable="true" data-id="cataluna">Cataluña</div>
+    <div class="etiqueta" draggable="true" data-id="madrid">Madrid</div>
+  </div>
 
-  <!-- CONTORNO DE ESPAÑA (MAPA BASE) -->
-  <path
-    d="M120,180 L200,120 L350,110 L480,140 L600,180 L650,260 L620,360 L520,420 L380,430 L260,400 L180,340 L140,260 Z"
-    fill="#ffffff"
-    stroke="#333"
-    stroke-width="4"
-  />
+  <div id="mapa">
 
-  <!-- ZONAS (ejemplo de comunidades) -->
-  <path id="andalucia"
-    d="M260,350 L420,350 L450,410 L300,430 Z"
-    fill="#9cc9ff"
-    stroke="#333"
-    data-name="Andalucía"
-  />
+    <!-- MAPA SVG -->
+    <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
 
-  <path id="cataluna"
-    d="M480,180 L560,200 L550,260 L480,240 Z"
-    fill="#9cc9ff"
-    stroke="#333"
-    data-name="Cataluña"
-  />
+      <!-- CONTORNO DE ESPAÑA -->
+      <path
+        d="M120,180 L200,120 L350,110 L480,140 L600,180 L650,260 L620,360 L520,420 L380,430 L260,400 L180,340 L140,260 Z"
+        fill="#ffffff"
+        stroke="#333"
+        stroke-width="4"
+      />
 
-  <path id="madrid"
-    d="M360,260 L390,260 L390,290 L360,290 Z"
-    fill="#9cc9ff"
-    stroke="#333"
-    data-name="Madrid"
-  />
+      <!-- ZONAS -->
+      <path id="andalucia" class="zona"
+        d="M260,350 L420,350 L450,410 L300,430 Z" />
 
-</svg>
+      <path id="cataluna" class="zona"
+        d="M480,180 L560,200 L550,260 L480,240 Z" />
 
+      <path id="madrid" class="zona"
+        d="M360,260 L390,260 L390,290 L360,290 Z" />
 
-  <script>
-    let draggedLabel = null;
-    const okSound = document.getElementById('sound-ok');
-    const errorSound = document.getElementById('sound-error');
+    </svg>
 
-    document.querySelectorAll('.label').forEach(label => {
-      label.addEventListener('dragstart', () => draggedLabel = label);
+  </div>
+</div>
+
+<script>
+  const etiquetas = document.querySelectorAll('.etiqueta');
+  const zonas = document.querySelectorAll('.zona');
+
+  etiquetas.forEach(et => {
+    et.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text', et.dataset.id);
     });
+  });
 
-    document.querySelectorAll('.region').forEach(region => {
-      region.addEventListener('dragover', e => e.preventDefault());
-      region.addEventListener('drop', () => {
-        const message = document.getElementById('message');
-        if (!draggedLabel) return;
+  zonas.forEach(zona => {
+    zona.addEventListener('dragover', e => e.preventDefault());
 
-        if (region.id === draggedLabel.dataset.region) {
-          region.classList.add('correct');
-          draggedLabel.remove();
-          okSound.play();
-          message.style.color = 'green';
-          message.textContent = '✔ Correcto';
-        } else {
-          errorSound.play();
-          message.style.color = 'red';
-          message.textContent = '✖ Incorrecto, vuelve a intentarlo';
-        }
-      });
+    zona.addEventListener('drop', e => {
+      e.preventDefault();
+      const idEtiqueta = e.dataTransfer.getData('text');
+
+      if (zona.id === idEtiqueta) {
+        zona.classList.add('correcta');
+        document.querySelector(`.etiqueta[data-id="${idEtiqueta}"]`).remove();
+        alert('¡Correcto!');
+      } else {
+        alert('No es correcto, inténtalo de nuevo');
+      }
     });
-  </script>
+  });
+</script>
+
 </body>
 </html>
-body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
-}
-
-#container {
-  display: flex;
-  gap: 20px;
-}
-
-#labels {
-  width: 30%;
-  background: white;
-  border-radius: 8px;
-  padding: 10px;
-  min-height: 520px;
-}
-
-.label {
-  background: #e3f2fd;
-  margin: 6px 0;
-  padding: 8px;
-  cursor: grab;
-  border-radius: 6px;
-  text-align: center;
-  font-weight: bold;
-}
-
-#region.correct {
-  fill: #a5d6a7;
-}
-
-#region {
-  fill: #eeeeee;
-  stroke: #555;
-}
-
-#map {
-  width: 70%;
-  background: white;
-  border-radius: 8px;
-}
-
-.region {
-  fill: #eeeeee;
-  stroke: #555;
-}
-
-.region.correct {
-  fill: #a5d6a7;
-}
-
-#message {
-  margin-top: 12px;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-}
-let draggedLabel = null;
-const okSound = document.getElementById("sound-ok");
-const errorSound = document.getElementById("sound-error");
-
-document.querySelectorAll(".label").forEach(label => {
-  label.addEventListener("dragstart", () => {
-    draggedLabel = label;
-  });
-});
-
-document.querySelectorAll(".region").forEach(region => {
-  region.addEventListener("dragover", e => e.preventDefault());
-
-  region.addEventListener("drop", () => {
-    const message = document.getElementById("message");
-    if (!draggedLabel) return;
-
-    if (region.id === draggedLabel.dataset.region) {
-      region.classList.add("correct");
-      draggedLabel.remove();
-      okSound.play();
-      message.style.color = "green";
-      message.textContent = "✔ Correcto";
-    } else {
-      errorSound.play();
-      message.style.color = "red";
-      message.textContent = "✖ Incorrecto, vuelve a intentarlo";
-    }
-  });
-});
